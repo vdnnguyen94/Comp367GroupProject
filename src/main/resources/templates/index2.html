@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COMP367 | Student Portal</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1 th:text="${greetingMessage}">Hello from Student</h1>
+            <h2>Welcome to COMP367</h2>
+        </div>
+    </header>
+
+    <section class="student-info">
+        <div class="container">
+            <h2>Student Information</h2>
+            <p>Name: <strong th:text="${studentName}">Van Nguyen</strong></p>
+            <p>ID: <strong th:text="${studentId}">123456789</strong></p>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 COMP367 Group Project. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
