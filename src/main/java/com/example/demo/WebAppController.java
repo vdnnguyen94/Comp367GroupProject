@@ -17,6 +17,8 @@ public class WebAppController {
         Dotenv dotenv = Dotenv.load(); 
         String name = dotenv.get("STUDENT1_NAME", "Van Nguyen DEFAULT");
         String id = dotenv.get("STUDENT1_ID", "301289600 DEFAULT");
+        String student2Name = dotenv.get("STUDENT2_NAME", "Seyeon Jo");
+        String stage = dotenv.get("STAGE", "DEVELOPMENT");
         if (now.getHour() < 12) {
             greeting = "Good morning, " + name;
         } else if (now.getHour() < 18) {
@@ -28,7 +30,8 @@ public class WebAppController {
         model.addAttribute("greetingMessage", greeting);
         model.addAttribute("studentName", name); 
         model.addAttribute("studentId", id);     
-
+        model.addAttribute("student2Name", student2Name);
+        model.addAttribute("stage", stage);
         return "index"; 
     }
 		
