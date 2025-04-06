@@ -12,6 +12,7 @@
         <div class="container">
             <h1 th:text="${greetingMessage}">Hello from Student</h1>
             <h2>Welcome to COMP367</h2>
+            <p><strong>Stage:</strong> <span th:text="${stage}">DEVELOPMENT</span></p>
         </div>
     </header>
 
@@ -20,6 +21,10 @@
             <h2>Student Information</h2>
             <p>Name: <strong th:text="${studentName}">Van Nguyen</strong></p>
             <p>ID: <strong th:text="${studentId}">123456789</strong></p>
+        </div>
+        <div class="container" style="margin-top: 2rem;">
+            <h2>Student 2 Information</h2>
+            <p>Name: <strong th:text="${student2Name}">Seyeon Jo</strong></p>
         </div>
     </section>
 
