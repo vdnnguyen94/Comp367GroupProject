@@ -16,7 +16,7 @@ pipeline {
         // CI/CD and Docker Config
         SONAR_PROJECT_KEY = 'COMP367_Lab2'
         SONAR_HOST_URL = 'http://localhost:9000'
-        SONAR_TOKEN = credentials('sonarqube-token')
+        SONAR_TOKEN = credentials('SQToken')
         DOCKER_CREDENTIALS = 'dockerhubpat'
         DOCKER_IMAGE = 'vdnnguyen94/Comp367Project'
         DOCKER_TAG = 'latest'
