@@ -32,7 +32,7 @@ public class WebAppController {
         model.addAttribute("studentId", id);     
         model.addAttribute("student2Name", student2Name);
         model.addAttribute("stage", stage);
-        return "index"; 
+        return "index2"; 
     }
 		
 }
