@@ -67,14 +67,14 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                bat """
-                    docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ^
-                    --build-arg STUDENT1_NAME=${STUDENT1_NAME} ^
-                    --build-arg STUDENT1_ID=${STUDENT1_ID} ^
-                    --build-arg STUDENT2_NAME=${STUDENT2_NAME} ^
-                    --build-arg STAGE=${STAGE} ^
-                    --build-arg APP_PORT=${APP_PORT} .
-                """
+                bat '''
+                    docker build -t %DOCKER_IMAGE%:%DOCKER_TAG% ^
+                    --build-arg STUDENT1_NAME="%STUDENT1_NAME%" ^
+                    --build-arg STUDENT1_ID="%STUDENT1_ID%" ^
+                    --build-arg STUDENT2_NAME="%STUDENT2_NAME%" ^
+                    --build-arg STAGE="%STAGE%" ^
+                    --build-arg APP_PORT="%APP_PORT%" .
+                '''
             }
         }
 
