@@ -18,7 +18,7 @@ pipeline {
         SONAR_HOST_URL = 'http://localhost:9000'
         SONAR_TOKEN = credentials('SQToken')
         DOCKER_CREDENTIALS = 'dockerhubpat'
-        DOCKER_IMAGE = 'vdnnguyen94/Comp367Project'
+        DOCKER_IMAGE = 'vdnnguyen94/comp367project'
         DOCKER_TAG = 'latest'
     }
 
@@ -73,6 +73,7 @@ pipeline {
                     echo STUDENT2_NAME=%STUDENT2_NAME%
                     echo STAGE=%STAGE%
                     echo APP_PORT=%APP_PORT%
+
                     docker build -t %DOCKER_IMAGE%:%DOCKER_TAG% ^
                     --build-arg STUDENT1_NAME="%STUDENT1_NAME%" ^
                     --build-arg STUDENT1_ID="%STUDENT1_ID%" ^
