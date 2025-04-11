@@ -15,6 +15,6 @@ FROM openjdk:23
 # ENV APP_PORT=$APP_PORT
 COPY .env /.env
 
-COPY target/Maven-Web-App-0.0.1-SNAPSHOT.jar /app.jar
+COPY target/EnterpriseApp.jar /app.jar
 
 CMD ["java", "-jar", "/app.jar"]
