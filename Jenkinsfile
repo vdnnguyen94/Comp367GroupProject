@@ -35,11 +35,17 @@ pipeline {
             }
         }
 
-        stage('Test') {
+        stage('Test & Coverage') {
             steps {
-                bat "mvn test"
+                bat 'mvn clean test jacoco:report'
             }
         }
+        stage('Archive JaCoCo Report') {
+            steps {
+                archiveArtifacts artifacts: 'target/site/jacoco/**', fingerprint: true
+            }
+        }
+
 
         stage('SonarQube Analysis') {
             steps {
