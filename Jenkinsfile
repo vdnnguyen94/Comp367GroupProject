@@ -112,7 +112,7 @@ pipeline {
                     docker build -t enterpriseapp-dev .
                     docker stop app-dev || echo No container running
                     docker rm app-dev || echo No container to remove
-                    docker run -d -p 5173:5174 --name app-dev enterpriseapp-dev
+                    docker run -d -p 5173:5173 --name app-dev enterpriseapp-dev
                 '''
             }
         }
@@ -146,7 +146,7 @@ pipeline {
                     docker build -t enterpriseapp-staging .
                     docker stop app-staging || echo No container running
                     docker rm app-staging || echo No container to remove
-                    docker run -d -p 5175:5174 --name app-staging enterpriseapp-staging
+                    docker run -d -p 5175:5175 --name app-staging enterpriseapp-staging
                 '''
             }
         }
@@ -163,7 +163,7 @@ pipeline {
                     docker build -t enterpriseapp-prod .
                     docker stop app-prod || echo No container running
                     docker rm app-prod || echo No container to remove
-                    docker run -d -p 5000:5174 --name app-prod enterpriseapp-prod
+                    docker run -d -p 5000:5000 --name app-prod enterpriseapp-prod
                 '''
             }
         }
