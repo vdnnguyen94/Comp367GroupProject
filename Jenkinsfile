@@ -61,7 +61,7 @@ pipeline {
         }
         stage('Deliver Artifact') {
             steps {
-                archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+                archiveArtifacts artifacts: 'target/EnterpriseApp.jar', fingerprint: true
             }
         }
 
