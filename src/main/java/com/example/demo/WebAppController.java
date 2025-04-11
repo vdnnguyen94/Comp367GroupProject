@@ -19,6 +19,7 @@ public class WebAppController {
         String id = dotenv.get("STUDENT1_ID", "301289600 DEFAULT");
         String student2Name = dotenv.get("STUDENT2_NAME", "Seyeon Jo");
         String stage = dotenv.get("STAGE", "DEVELOPMENT");
+        String port = System.getenv().getOrDefault("APP_PORT", "5173");
         if (now.getHour() < 12) {
             greeting = "Good morning, " + name;
         } else if (now.getHour() < 18) {
@@ -32,6 +33,7 @@ public class WebAppController {
         model.addAttribute("studentId", id);     
         model.addAttribute("student2Name", student2Name);
         model.addAttribute("stage", stage);
+        model.addAttribute("port", port);
         return "index2"; 
     }
 		

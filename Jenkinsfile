@@ -40,12 +40,6 @@ pipeline {
                 bat 'mvn clean package jacoco:report'
             }
         }
-        stage('Archive JaCoCo Report') {
-            steps {
-                archiveArtifacts artifacts: 'target/site/jacoco/**', fingerprint: true
-            }
-        }
-
 
         stage('SonarQube Analysis') {
             steps {
@@ -106,13 +100,71 @@ pipeline {
             }
         }
 
-        stage('Deploy to Production') {
+        stage('Deploy to Dev Environment') {
             steps {
-                echo "Deploying to ${STAGE}"
-                echo "Name: ${STUDENT1_NAME}"
-                echo "Student ID: ${STUDENT1_ID}"
-                echo "Student 2: ${STUDENT2_NAME}"
-                echo "App will be available at http://localhost:${APP_PORT}"
+                bat '''
+                    echo APP_PORT=5173 > .env
+                    echo STUDENT1_NAME="DEV VAN NGUYEN" >> .env
+                    echo STUDENT1_ID=301289600 >> .env
+                    echo STUDENT2_NAME="Seyeon Jo" >> .env
+                    echo STAGE=DEV >> .env
+
+                    docker build -t enterpriseapp-dev .
+                    docker stop app-dev || echo No container running
+                    docker rm app-dev || echo No container to remove
+                    docker run -d -p 5173:5174 --name app-dev enterpriseapp-dev
+                '''
+            }
+        }
+
+        stage('Deploy to QAT Environment') {
+            steps {
+                bat '''
+                    echo APP_PORT=5174 > .env
+                    echo STUDENT1_NAME="QAT VAN NGUYEN" >> .env
+                    echo STUDENT1_ID=301289600 >> .env
+                    echo STUDENT2_NAME="Seyeon Jo" >> .env
+                    echo STAGE=QAT >> .env
+
+                    docker build -t enterpriseapp-qat .
+                    docker stop app-qat || echo No container running
+                    docker rm app-qat || echo No container to remove
+                    docker run -d -p 5174:5174 --name app-qat enterpriseapp-qat
+                '''
+            }
+        }
+
+        stage('Deploy to Staging Environment') {
+            steps {
+                bat '''
+                    echo APP_PORT=5175 > .env
+                    echo STUDENT1_NAME="STAGING VAN NGUYEN" >> .env
+                    echo STUDENT1_ID=301289600 >> .env
+                    echo STUDENT2_NAME="Seyeon Jo" >> .env
+                    echo STAGE=STAGING >> .env
+
+                    docker build -t enterpriseapp-staging .
+                    docker stop app-staging || echo No container running
+                    docker rm app-staging || echo No container to remove
+                    docker run -d -p 5175:5174 --name app-staging enterpriseapp-staging
+                '''
+            }
+        }
+
+        stage('Deploy to Production Environment') {
+            steps {
+                bat '''
+                    echo APP_PORT=5000 > .env
+                    echo STUDENT1_NAME="PRODUCTION VAN NGUYEN" >> .env
+                    echo STUDENT1_ID=301289600 >> .env
+                    echo STUDENT2_NAME="Seyeon Jo" >> .env
+                    echo STAGE=PRODUCTION >> .env
+
+                    docker build -t enterpriseapp-prod .
+                    docker stop app-prod || echo No container running
+                    docker rm app-prod || echo No container to remove
+                    docker run -d -p 5000:5174 --name app-prod enterpriseapp-prod
+                '''
             }
         }
     }
