@@ -48,7 +48,17 @@ pipeline {
                 }
             }
         }
-
+        stage('Create .env for Docker & Archive') {
+            steps {
+                bat """
+                echo APP_PORT=${APP_PORT} > .env
+                echo STAGE=${STAGE} >> .env
+                echo STUDENT1_NAME=${STUDENT1_NAME} >> .env
+                echo STUDENT1_ID=${STUDENT1_ID} >> .env
+                echo STUDENT2_NAME=${STUDENT2_NAME} >> .env
+                """
+            }
+        }
         stage('Deliver Artifact') {
             steps {
                 archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
@@ -92,7 +102,7 @@ pipeline {
 
         stage('Deploy to Production') {
             steps {
-                echo "🚀 Deploying to ${STAGE}"
+                echo "Deploying to ${STAGE}"
                 echo "Name: ${STUDENT1_NAME}"
                 echo "Student ID: ${STUDENT1_ID}"
                 echo "Student 2: ${STUDENT2_NAME}"
@@ -106,10 +116,10 @@ pipeline {
             bat "docker logout"
         }
         success {
-            echo "✅ CI/CD completed for ${STUDENT1_NAME} and ${STUDENT2_NAME}"
+            echo "CI/CD completed for ${STUDENT1_NAME} and ${STUDENT2_NAME}"
         }
         failure {
-            echo "❌ Build failed! Check logs."
+            echo "Build failed! Check logs."
         }
     }
 }
