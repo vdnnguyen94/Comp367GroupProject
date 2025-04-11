@@ -37,7 +37,7 @@ pipeline {
 
         stage('Test & Coverage') {
             steps {
-                bat 'mvn clean test jacoco:report'
+                bat 'mvn clean package jacoco:report'
             }
         }
         stage('Archive JaCoCo Report') {
