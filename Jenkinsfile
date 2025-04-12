@@ -38,6 +38,7 @@ pipeline {
         stage('Test & Coverage') {
             steps {
                 bat 'mvn clean package jacoco:report'
+                archiveArtifacts artifacts: 'target/site/jacoco/**', fingerprint: true
             }
         }
 
